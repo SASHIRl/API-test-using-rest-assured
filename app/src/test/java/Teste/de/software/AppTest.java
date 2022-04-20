@@ -3,8 +3,10 @@
  */
 package Teste.de.software;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -13,6 +15,14 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class AppTest {
+
+    //roda apenas uma vez
+    @BeforeClass
+    public static void setup() {
+        //Usar o .log().all() faz o programa ser mais verboso no erro.
+        //Esse comando subistituiu todos meus .log().all()
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
 
     @Test
     public void testeListaMetaDadosDoUsuario() {
@@ -29,8 +39,8 @@ public class AppTest {
 
     @Test
     public void testeCriaUsuarioComSucesso() {
-        //Usar o .log().all() faz o programa ser mais verboso no erro.
-        given().log().all().
+
+        given().//.log().all().
                 //Tenho que informar que estou passando um JSON
                 contentType(ContentType.JSON).
                 //Copiado do Postman
