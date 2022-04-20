@@ -4,10 +4,12 @@
 package Teste.de.software;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 public class AppTest {
     @Test public void appHasAGreeting() {
+        assertThat(1, is(1));
     }
 }
