@@ -3,9 +3,11 @@
  */
 package Teste.de.software;
 
+import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -23,5 +25,20 @@ public class AppTest {
                 statusCode(HttpStatus.SC_OK).
                 body("page", is(2)).
                 body("data", is(notNullValue()));
+    }
+
+    @Test
+    public void testeCriaUsuarioComSucesso() {
+        //Usar o .log().all() faz o programa ser mais verboso no erro.
+        given().log().all().
+                //Tenho que informar que estou passando um JSON
+                contentType(ContentType.JSON).
+                //Copiado do Postman
+                body("{\"name\": \"Diego\", \"job\": \"Jogador\"}").
+        when().
+            post("https://reqres.in/api/users").
+        then().
+            statusCode(HttpStatus.SC_CREATED).
+            body("name", is("Diego"));
     }
 }
