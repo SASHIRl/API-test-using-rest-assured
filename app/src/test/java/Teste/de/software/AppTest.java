@@ -3,13 +3,25 @@
  */
 package Teste.de.software;
 
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
 
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        assertThat(1, is(1));
+
+    @Test
+    public void testeListaMetaDadosDoUsuario() {
+        //Escrita do restAssured para testar a api do site https://reqres.in
+        when().
+                get("https://reqres.in/api/users?page=2").
+        then().
+                //is() é do hamcrest, eu não coloquei a dependência dele no build.gradle
+                //Portanto, ele puxou do JUNIT ou do restAssured
+                statusCode(HttpStatus.SC_OK).
+                body("page", is(2)).
+                body("data", is(notNullValue()));
     }
 }

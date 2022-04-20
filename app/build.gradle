@@ -8,4 +8,7 @@ repositories {
 
 dependencies {
     testImplementation 'junit:junit:4.+'
+    //Implementação da dependência do restAssure usando Gradle
+    testImplementation 'io.rest-assured:rest-assured:4.+'
 }
+
