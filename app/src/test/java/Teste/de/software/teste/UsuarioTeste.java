@@ -4,27 +4,14 @@
 package Teste.de.software.teste;
 
 import Teste.de.software.dominio.Usuario;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
-public class UsuarioTeste {
-
-    //roda apenas uma vez
-    @BeforeClass
-    public static void setup() {
-        //Usar o .log().all() faz o programa ser mais verboso no erro.
-        //Esse comando subistituiu todos meus .log().all()
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        baseURI = "https://reqres.in";
-        basePath = "/api";
-    }
+public class UsuarioTeste extends BaseTeste{
 
     @Test
     public void testeListaMetaDadosDoUsuario() {
@@ -43,7 +30,10 @@ public class UsuarioTeste {
 
     @Test
     public void testeCriaUsuarioComSucesso() {
-
+        //A API que eu estou trabalhando tem um problema.
+        //OS campos de registro da API são apenas nome e job, ele deveria rejeitar o e-mail.
+        //O correto seria a API rejeitar, vou trabalhar na classe de dominio como se houvesse a rejeição.
+        //Há como usar o 'JsonIgonoreProperties' e ignorar uma propriedade específica ou todas desconhecidas.
         Usuario usuario = new Usuario("Diego", "Jogador", "email@reqres.com");
 
         given().//.log().all().
