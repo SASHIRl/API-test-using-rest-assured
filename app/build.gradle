@@ -7,6 +7,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
     testImplementation 'junit:junit:4.+'
     //Implementação da dependência do restAssure usando Gradle
     testImplementation 'io.rest-assured:rest-assured:4.+'

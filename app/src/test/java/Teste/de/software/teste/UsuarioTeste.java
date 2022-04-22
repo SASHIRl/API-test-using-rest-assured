@@ -3,6 +3,7 @@
  */
 package Teste.de.software.teste;
 
+import Teste.de.software.dominio.Usuario;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -43,11 +44,13 @@ public class UsuarioTeste {
     @Test
     public void testeCriaUsuarioComSucesso() {
 
+        Usuario usuario = new Usuario("Diego", "Jogador");
+
         given().//.log().all().
                 //Tenho que informar que estou passando um JSON
                 contentType(ContentType.JSON).
                 //Copiado do Postman
-                body("{\"name\": \"Diego\", \"job\": \"Jogador\"}").
+                body(usuario).
         when().
             post("/users").
         then().
