@@ -38,8 +38,9 @@ public class UsuarioTeste extends BaseTeste{
 
         given().//.log().all().
                 //Tenho que informar que estou passando um JSON
-                contentType(ContentType.JSON).
-                //Copiado do Postman
+        //Esse contentType não é mais necessário, criei na BaseTeste uma classe que já 'seta' todos os types
+        //para JSON, deixarei apenas para conhecimento.
+                //contentType(ContentType.JSON).
                 body(usuario).
         when().
             post("/users").
