@@ -13,13 +13,18 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class UsuarioTeste extends BaseTeste{
 
+    //Escrever o código dessa forma com endpoint fica mais fácil de um usuário novo bater o olho e entender
+    //Até mesmo para o próprio usuário entender o que o endpoint faz.
+    private static final String LISTA_USUARIOS_ENDPOINT = "/users";
+    private static final String CRIAR_USUARIO_ENDPOINT = "/users";
+
     @Test
     public void testeListaMetaDadosDoUsuario() {
         given().
                 param("page", "2").
         //Escrita do restAssured para testar a api do site https://reqres.in
         when().
-                get("/users").
+                get(LISTA_USUARIOS_ENDPOINT).
         then().
                 //is() é do hamcrest, eu não coloquei a dependência dele no build.gradle
                 //Portanto, ele puxou do JUNIT ou do restAssured
@@ -43,7 +48,7 @@ public class UsuarioTeste extends BaseTeste{
                 //contentType(ContentType.JSON).
                 body(usuario).
         when().
-            post("/users").
+            post(CRIAR_USUARIO_ENDPOINT).
         then().
             statusCode(HttpStatus.SC_CREATED).
             body("name", is("Diego"));
