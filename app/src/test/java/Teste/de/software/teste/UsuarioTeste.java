@@ -44,7 +44,7 @@ public class UsuarioTeste {
     @Test
     public void testeCriaUsuarioComSucesso() {
 
-        Usuario usuario = new Usuario("Diego", "Jogador");
+        Usuario usuario = new Usuario("Diego", "Jogador", "email@reqres.com");
 
         given().//.log().all().
                 //Tenho que informar que estou passando um JSON
@@ -56,5 +56,16 @@ public class UsuarioTeste {
         then().
             statusCode(HttpStatus.SC_CREATED).
             body("name", is("Diego"));
+    }
+
+    @Test
+    public void testListaUsuario() {
+        given().
+                pathParam("user", "2").
+        when().
+                get("/users/{user}").
+        then().
+                statusCode(HttpStatus.SC_OK).
+                body("data.email", containsString("@reqres.in"));
     }
 }
