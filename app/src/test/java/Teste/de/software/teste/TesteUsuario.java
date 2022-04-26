@@ -66,20 +66,37 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeTamanhoDosItensMostradosIgualAoPerPage() {
+        int paginaEsperada = 2;
+        int perPageEsperado = retornaPerPageEsperado(paginaEsperada);
+
         given().
-                param("page", "2").
+                param("page", paginaEsperada).
         when().
                 get(LISTA_USUARIOS_ENDPOINT).
         then().
                 statusCode(HttpStatus.SC_OK).
                 body(
-                        "page", is(2),
+                        "page", is(paginaEsperada),
                         //data é um Array, checa se é um array de 6 posições.
-                        "data.size()", is(6),
+                        "data.size()", is(perPageEsperado),
                         //Checa cada um dos conteúdos e informo que quero que o avatar comece com https://s3.amazonasws.com
                         //(it de iterator)
                         //Tudo que ele achar com https://s3.amazonasws.com irá retornar em um array de retorno com cada um dos itens
-                        "data.findAll { it.avatar.startsWith('https://reqres.in/img') }.size()", is (6)
+                        "data.findAll { it.avatar.startsWith('https://reqres.in/img') }.size()", is (perPageEsperado)
                 );
+    }
+
+    private int retornaPerPageEsperado(int page) {
+        int perPageEsperado = given().
+                param("page", page).
+            when().
+                get(LISTA_USUARIOS_ENDPOINT).
+            then().
+                //Apesar de querer apenas extrair um item, faço o status code para garantir que ele conseguiu
+                //fazer a solicitação. O teste já irá falhar com a direção melhor desenhada para poder investigar melhor
+                statusCode(HttpStatus.SC_OK).
+            extract().
+                path("per_page");
+        return perPageEsperado;
     }
 }
