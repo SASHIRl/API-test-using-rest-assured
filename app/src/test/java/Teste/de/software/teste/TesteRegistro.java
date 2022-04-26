@@ -11,7 +11,7 @@ public class TesteRegistro extends TesteBase {
     private static final String REGISTRA_USUARIO_ENDPOINT = "/register";
 
     @Test
-    public void testNaoEfetuaRegistroQuandoSenhaEstaEmBranco() {
+    public void testeNaoEfetuaRegistroQuandoSenhaEstaEmBranco() {
         Usuario usuario = new Usuario();
         usuario.setEmail("diego@reqress.in");
         given().

@@ -18,7 +18,7 @@ public class TesteUsuario extends TesteBase {
     private static final String CRIAR_USUARIO_ENDPOINT = "/users";
 
     @Test
-    public void testeListaMetaDadosDoUsuario() {
+    public void testeMostraPaginaEspecifica() {
         given().
                 param("page", "2").
         //Escrita do restAssured para testar a api do site https://reqres.in
