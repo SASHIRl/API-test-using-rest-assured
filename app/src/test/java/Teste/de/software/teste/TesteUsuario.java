@@ -63,4 +63,23 @@ public class TesteUsuario extends TesteBase {
                 statusCode(HttpStatus.SC_OK).
                 body("data.email", containsString("@reqres.in"));
     }
+
+    @Test
+    public void testeTamanhoDosItensMostradosIgualAoPerPage() {
+        given().
+                param("page", "2").
+        when().
+                get(LISTA_USUARIOS_ENDPOINT).
+        then().
+                statusCode(HttpStatus.SC_OK).
+                body(
+                        "page", is(2),
+                        //data é um Array, checa se é um array de 6 posições.
+                        "data.size()", is(6),
+                        //Checa cada um dos conteúdos e informo que quero que o avatar comece com https://s3.amazonasws.com
+                        //(it de iterator)
+                        //Tudo que ele achar com https://s3.amazonasws.com irá retornar em um array de retorno com cada um dos itens
+                        "data.findAll { it.avatar.startsWith('https://reqres.in/img') }.size()", is (6)
+                );
+    }
 }
