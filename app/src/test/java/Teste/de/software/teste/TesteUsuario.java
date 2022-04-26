@@ -4,14 +4,13 @@
 package Teste.de.software.teste;
 
 import Teste.de.software.dominio.Usuario;
-import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class UsuarioTeste extends BaseTeste{
+public class TesteUsuario extends TesteBase {
 
     //Escrever o código dessa forma com endpoint fica mais fácil de um usuário novo bater o olho e entender
     //Até mesmo para o próprio usuário entender o que o endpoint faz.
